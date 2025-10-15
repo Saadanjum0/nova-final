@@ -1,181 +1,45 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import FadeIn from '../components/animations/FadeIn';
-import NovaButton from '../components/ui/NovaButton';
-import { Mail, MapPin, Clock, CheckCircle } from 'lucide-react';
-
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email'),
-  company: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters')
-});
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const Contact = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm({
-    resolver: zodResolver(formSchema)
-  });
-
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    // TODO: Connect to backend API or email service
-    // Simulating API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log('Form submitted:', data);
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    reset();
-  };
-
   return (
-    <div className="bg-black text-white pt-20">
-      {/* Hero */}
-      <section className="py-32 px-6 md:px-12 lg:px-24">
-        <div className="max-w-screen-xl mx-auto text-center">
-          <FadeIn>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-space font-light tracking-tight mb-8">
-              Let's build something intelligent.
-            </h1>
-          </FadeIn>
+    <div className="relative min-h-screen bg-black overflow-hidden">
+      {/* Blurred Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/20 via-black to-orange-900/20 blur-3xl"></div>
+      
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6">
+        <div className="text-center space-y-6 sm:space-y-8 max-w-2xl">
+          {/* Coming Soon Badge */}
+          <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-orange-500/10 backdrop-blur-md border border-orange-300/30 rounded-full text-xs sm:text-sm mb-6 sm:mb-8">
+            <span className="text-orange-100">Get in Touch Soon</span>
+                </div>
+
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent">
+            Coming Soon
+          </h1>
+          
+          {/* Description */}
+          <p className="text-lg sm:text-xl md:text-2xl text-orange-100/80 font-light leading-relaxed px-4">
+            We're setting up our communication channels. Reach out to us soon!
+          </p>
+
+          {/* Back Button */}
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black rounded-full font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 mt-6 sm:mt-8"
+          >
+            <ArrowLeft size={20} />
+            Back to Home
+          </Link>
         </div>
-      </section>
+      </div>
 
-      {/* Contact Form */}
-      <section className="pb-32 px-6 md:px-12 lg:px-24">
-        <div className="max-w-2xl mx-auto">
-          {!isSubmitted ? (
-            <FadeIn>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Name */}
-                <div>
-                  <label htmlFor="name" className="block text-lg font-medium text-nova-text-primary mb-2">
-                    Name *
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    {...register('name')}
-                    className="w-full px-6 py-4 bg-nova-bg-raised border border-nova-glass-border text-nova-text-primary placeholder-nova-text-tertiary focus:border-nova-accent focus:outline-none transition-colors rounded-none"
-                    placeholder="Your name"
-                  />
-                  {errors.name && (
-                    <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>
-                  )}
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-lg font-medium text-nova-text-primary mb-2">
-                    Email *
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    {...register('email')}
-                    className="w-full px-6 py-4 bg-nova-bg-raised border border-nova-glass-border text-nova-text-primary placeholder-nova-text-tertiary focus:border-nova-accent focus:outline-none transition-colors rounded-none"
-                    placeholder="your.email@example.com"
-                  />
-                  {errors.email && (
-                    <p className="mt-2 text-sm text-red-500">{errors.email.message}</p>
-                  )}
-                </div>
-
-                {/* Company */}
-                <div>
-                  <label htmlFor="company" className="block text-lg font-medium text-nova-text-primary mb-2">
-                    Company
-                  </label>
-                  <input
-                    id="company"
-                    type="text"
-                    {...register('company')}
-                    className="w-full px-6 py-4 bg-nova-bg-raised border border-nova-glass-border text-nova-text-primary placeholder-nova-text-tertiary focus:border-nova-accent focus:outline-none transition-colors rounded-none"
-                    placeholder="Your company (optional)"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-lg font-medium text-nova-text-primary mb-2">
-                    Tell us about your project *
-                  </label>
-                  <textarea
-                    id="message"
-                    {...register('message')}
-                    rows={6}
-                    className="w-full px-6 py-4 bg-nova-bg-raised border border-nova-glass-border text-nova-text-primary placeholder-nova-text-tertiary focus:border-nova-accent focus:outline-none transition-colors rounded-none resize-none"
-                    placeholder="Describe your project, goals, and how we can help..."
-                  />
-                  {errors.message && (
-                    <p className="mt-2 text-sm text-red-500">{errors.message.message}</p>
-                  )}
-                </div>
-
-                {/* Submit Button */}
-                <NovaButton
-                  type="submit"
-                  variant="primary"
-                  className="w-full text-xl"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message →'}
-                </NovaButton>
-              </form>
-            </FadeIn>
-          ) : (
-            <FadeIn>
-              <div className="bg-nova-bg-raised border border-nova-success p-12 rounded-none text-center space-y-6">
-                <CheckCircle size={64} className="text-nova-success mx-auto" />
-                <h2 className="text-3xl font-space font-semibold text-nova-text-primary">
-                  Message Sent!
-                </h2>
-                <p className="text-lg text-nova-text-secondary">
-                  We'll respond within 24 hours.
-                </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  className="text-nova-accent hover:text-nova-accent-bright transition-colors font-medium"
-                >
-                  Send another message
-                </button>
-              </div>
-            </FadeIn>
-          )}
-
-          {/* Contact Info */}
-          <FadeIn delay={0.2}>
-            <div className="mt-16 space-y-6">
-              <div className="flex items-center gap-4 text-nova-text-secondary">
-                <Mail size={24} className="text-nova-accent" />
-                <a
-                  href="mailto:hello@novaai.studio"
-                  className="text-lg hover:text-nova-accent transition-colors"
-                >
-                  hello@novaai.studio
-                </a>
-              </div>
-              <div className="flex items-center gap-4 text-nova-text-secondary">
-                <MapPin size={24} className="text-nova-accent" />
-                <span className="text-lg">Lahore, Pakistan</span>
-              </div>
-              <div className="flex items-center gap-4 text-nova-text-secondary">
-                <Clock size={24} className="text-nova-accent" />
-                <span className="text-lg">PKT (UTC+5)</span>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      {/* Decorative Elements */}
+      <div className="absolute top-40 left-32 w-40 sm:w-64 h-40 sm:h-64 bg-yellow-500/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-20 w-64 sm:w-96 h-64 sm:h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
     </div>
   );
 };

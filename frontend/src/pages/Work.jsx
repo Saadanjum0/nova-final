@@ -1,199 +1,45 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import FadeIn from '../components/animations/FadeIn';
-import Badge from '../components/ui/NovaBadge';
-import { X } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const Work = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
-
-  const projects = [
-    {
-      id: 1,
-      name: 'Vocalia',
-      category: 'Voice AI',
-      status: 'In Development',
-      statusVariant: 'accent',
-      gradient: 'from-indigo-500 to-purple-600',
-      problem: 'Building natural voice interactions at scale is complex. Most solutions require extensive infrastructure and lack real-time responsiveness.',
-      solution: 'Vocalia provides a complete voice AI infrastructure with sub-100ms latency, natural language understanding, and seamless integration capabilities.',
-      technologies: ['WebRTC', 'Neural Speech Synthesis', 'Real-time NLU', 'Cloud Infrastructure'],
-      impact: 'Enables developers to add voice capabilities to any application in minutes, not months.'
-    },
-    {
-      id: 2,
-      name: 'RAGify',
-      category: 'Knowledge Systems',
-      status: 'Concept',
-      statusVariant: 'default',
-      gradient: 'from-violet-500 to-fuchsia-600',
-      problem: 'Traditional search fails to understand context. Users get irrelevant results that waste time and reduce productivity.',
-      solution: 'RAGify uses advanced retrieval-augmented generation to provide context-aware answers from your knowledge base with citations.',
-      technologies: ['Vector Embeddings', 'RAG Architecture', 'Semantic Search', 'LLM Integration'],
-      impact: 'Transforms static documentation into an intelligent assistant that understands user intent.'
-    },
-    {
-      id: 3,
-      name: 'Rasta',
-      category: 'Digital Experience',
-      status: 'Live',
-      statusVariant: 'success',
-      gradient: 'from-blue-500 to-cyan-600',
-      problem: 'Public transit systems lack real-time intelligence. Commuters face uncertainty and inefficiency.',
-      solution: 'Rasta combines real-time data, predictive analytics, and intuitive UX to make urban mobility seamless.',
-      technologies: ['Real-time APIs', 'Predictive ML', 'Mobile-First Design', 'Progressive Web App'],
-      impact: 'Reduced average commute planning time by 67% for 10,000+ daily users.'
-    },
-    {
-      id: 4,
-      name: 'Future Project',
-      category: 'TBD',
-      status: 'Coming Soon',
-      statusVariant: 'default',
-      gradient: 'from-emerald-500 to-teal-600',
-      problem: 'Stay tuned for our next innovation.',
-      solution: 'Something exciting is brewing in the Nova AI labs.',
-      technologies: ['TBD'],
-      impact: 'Coming soon.'
-    }
-  ];
-
   return (
-    <div className="bg-black text-white pt-20">
-      {/* Header */}
-      <section className="py-32 px-6 md:px-12 lg:px-24">
-        <div className="max-w-screen-xl mx-auto text-center">
-          <FadeIn>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-space font-light tracking-tight mb-8">
-              Selected Projects
-            </h1>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <p className="text-xl md:text-2xl text-nova-text-secondary max-w-3xl mx-auto">
-              Internal experiments. Client work. Concepts in motion.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* Project Grid */}
-      <section className="pb-32 px-6 md:px-12 lg:px-24">
-        <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <FadeIn key={project.id} delay={index * 0.1}>
-                <motion.div
-                  className="project-card relative overflow-hidden h-96 cursor-pointer group"
-                  whileHover={{ scale: 1.02, y: -4 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setSelectedProject(project)}
-                >
+    <div className="relative min-h-screen bg-black overflow-hidden">
+      {/* Blurred Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-orange-900/20 blur-3xl"></div>
+      
                   {/* Content */}
-                  <div className="relative z-10 h-full p-8 flex flex-col justify-between">
-                    <div className="flex gap-3">
-                      <Badge variant="accent">{project.category}</Badge>
-                      <Badge variant={project.statusVariant}>{project.status}</Badge>
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-space font-bold mb-2 text-white">{project.name}</h3>
-                      <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-indigo-300 font-medium">View Details →</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6">
+        <div className="text-center space-y-6 sm:space-y-8 max-w-2xl">
+          {/* Coming Soon Badge */}
+          <div className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-orange-500/10 backdrop-blur-md border border-orange-300/30 rounded-full text-xs sm:text-sm mb-6 sm:mb-8">
+            <span className="text-orange-100">Portfolio Loading</span>
           </div>
-        </div>
-      </section>
 
-      {/* Case Study Modal */}
-      {selectedProject && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 overflow-y-auto"
-          onClick={() => setSelectedProject(null)}
-        >
-          <div className="min-h-screen px-6 py-20 flex items-center justify-center">
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="bg-[rgba(26,26,28,0.95)] backdrop-blur-2xl border border-white/10 rounded-2xl max-w-4xl w-full p-12 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 text-nova-text-secondary hover:text-nova-text-primary transition-colors"
-                aria-label="Close"
-              >
-                <X size={32} />
-              </button>
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold bg-gradient-to-r from-purple-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
+            Coming Soon
+          </h1>
+          
+          {/* Description */}
+          <p className="text-lg sm:text-xl md:text-2xl text-orange-100/80 font-light leading-relaxed px-4">
+            Our portfolio is being meticulously crafted. Check back soon to see our work.
+          </p>
 
-              {/* Modal Content */}
-              <div className="space-y-8">
-                {/* Header */}
-                <div>
-                  <h2 className="text-4xl md:text-5xl font-space font-bold mb-4">
-                    {selectedProject.name}
-                  </h2>
-                  <div className="flex gap-3">
-                    <Badge variant="accent">{selectedProject.category}</Badge>
-                    <Badge variant={selectedProject.statusVariant}>{selectedProject.status}</Badge>
+          {/* Back Button */}
+          <Link 
+            to="/" 
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black rounded-full font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 mt-6 sm:mt-8"
+          >
+            <ArrowLeft size={20} />
+            Back to Home
+          </Link>
                   </div>
                 </div>
 
-                {/* Hero Gradient */}
-                <div className="h-64 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-2xl border border-indigo-500/20"></div>
-
-                {/* Problem */}
-                <div>
-                  <h3 className="text-2xl font-space font-semibold mb-4 text-nova-text-primary">
-                    Problem
-                  </h3>
-                  <p className="text-lg text-nova-text-secondary leading-relaxed">
-                    {selectedProject.problem}
-                  </p>
-                </div>
-
-                {/* Solution */}
-                <div>
-                  <h3 className="text-2xl font-space font-semibold mb-4 text-nova-text-primary">
-                    Solution
-                  </h3>
-                  <p className="text-lg text-nova-text-secondary leading-relaxed">
-                    {selectedProject.solution}
-                  </p>
-                </div>
-
-                {/* Technologies */}
-                <div>
-                  <h3 className="text-2xl font-space font-semibold mb-4 text-nova-text-primary">
-                    Key Technologies
-                  </h3>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProject.technologies.map((tech, index) => (
-                      <Badge key={index} variant="default">{tech}</Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Impact */}
-                <div>
-                  <h3 className="text-2xl font-space font-semibold mb-4 text-nova-text-primary">
-                    Impact
-                  </h3>
-                  <p className="text-lg text-nova-text-secondary leading-relaxed">
-                    {selectedProject.impact}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
+      {/* Decorative Elements */}
+      <div className="absolute top-10 right-20 w-56 sm:w-80 h-56 sm:h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-32 left-20 w-48 sm:w-72 h-48 sm:h-72 bg-orange-500/20 rounded-full blur-3xl"></div>
     </div>
   );
 };

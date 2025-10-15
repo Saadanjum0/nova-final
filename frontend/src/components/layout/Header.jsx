@@ -15,10 +15,10 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full h-20 bg-black/80 backdrop-blur-xl border-b border-white/6 z-50 px-6 md:px-12 lg:px-24">
+    <header className="fixed top-0 w-full h-20 bg-transparent backdrop-blur-md border-b border-orange-400/10 z-50 px-6 md:px-12 lg:px-24">
       <div className="h-full flex items-center justify-between max-w-screen-2xl mx-auto">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-space font-medium text-white hover:text-emerald-400 transition-colors">
+        <Link to="/" className="text-2xl font-space font-medium bg-gradient-to-r from-orange-300 to-yellow-400 bg-clip-text text-transparent hover:from-orange-400 hover:to-yellow-500 transition-all drop-shadow-lg">
           Nova AI
         </Link>
 
@@ -28,10 +28,10 @@ const Header = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={`text-lg font-inter transition-colors ${
+              className={`text-lg font-inter transition-colors drop-shadow-lg ${
                 location.pathname === link.path
-                  ? 'text-white'
-                  : 'text-nova-text-tertiary hover:text-white'
+                  ? 'text-orange-300 font-semibold'
+                  : 'text-orange-200/70 hover:text-orange-300'
               }`}
             >
               {link.name}
@@ -41,7 +41,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-nova-text-primary"
+          className="md:hidden text-orange-300 drop-shadow-lg"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -51,7 +51,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-black border-b border-nova-glass-border">
+        <div className="md:hidden absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-b border-orange-400/10">
           <nav className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => (
               <Link
@@ -60,8 +60,8 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-lg font-inter transition-colors ${
                   location.pathname === link.path
-                    ? 'text-white'
-                    : 'text-nova-text-tertiary hover:text-white'
+                    ? 'text-orange-300 font-semibold'
+                    : 'text-orange-200/70 hover:text-orange-300'
                 }`}
               >
                 {link.name}
