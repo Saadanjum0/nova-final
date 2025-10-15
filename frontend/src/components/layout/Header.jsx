@@ -15,10 +15,10 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full h-20 bg-black border-b border-nova-glass-border z-50 px-6 md:px-12 lg:px-24">
+    <header className="fixed top-0 w-full h-20 bg-black/80 backdrop-blur-xl border-b border-white/6 z-50 px-6 md:px-12 lg:px-24">
       <div className="h-full flex items-center justify-between max-w-screen-2xl mx-auto">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-space font-bold text-nova-accent hover:text-nova-accent-bright transition-colors">
+        <Link to="/" className="text-2xl font-space font-medium text-white hover:text-emerald-400 transition-colors">
           Nova AI
         </Link>
 
