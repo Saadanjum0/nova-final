@@ -60,8 +60,8 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-lg font-inter transition-colors ${
                   location.pathname === link.path
-                    ? 'text-nova-accent-bright'
-                    : 'text-nova-text-tertiary hover:text-nova-text-primary'
+                    ? 'text-white'
+                    : 'text-nova-text-tertiary hover:text-white'
                 }`}
               >
                 {link.name}
