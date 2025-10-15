@@ -1,0 +1,17 @@
+{
+  "name": "nova-final",
+  "version": "1.0.0",
+  "description": "Nova AI - Design-driven engineering studio",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm start",
+    "install": "cd frontend && npm install"
+  },
+  "keywords": ["ai", "engineering", "design", "studio"],
+  "author": "Nova AI",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
