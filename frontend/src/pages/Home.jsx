@@ -210,8 +210,9 @@ const Home = () => {
                   Nova AI is a design-driven engineering studio crafting the next generation of
                   conversational systems. Based in Lahore. Working globally.
                 </p>
-                <Link to="/about" className="inline-flex items-center gap-2 text-nova-accent hover:text-nova-accent-bright transition-colors font-medium">
-                  More About Us <ArrowRight size={20} />
+                <Link to="/about" className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors font-medium group">
+                  More About Us 
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </FadeIn>
