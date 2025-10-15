@@ -146,7 +146,7 @@ const Work = () => {
                 </div>
 
                 {/* Hero Gradient */}
-                <div className={`h-64 bg-gradient-to-br ${selectedProject.gradient} rounded-none opacity-80`}></div>
+                <div className="h-64 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-2xl border border-indigo-500/20"></div>
 
                 {/* Problem */}
                 <div>
