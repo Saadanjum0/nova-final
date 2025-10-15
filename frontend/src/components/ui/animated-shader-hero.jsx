@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button as MovingBorderButton } from './moving-border';
+import { ChevronDown } from 'lucide-react';
 
 // Reusable Shader Background Hook
 const useShaderBackground = () => {
@@ -322,6 +323,34 @@ const AnimatedText = () => {
   );
 };
 
+// Scroll Down Indicator - Simple Chevron Only
+const ScrollIndicator = () => {
+  const scrollToContent = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <motion.div
+      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+      onClick={scrollToContent}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.5, duration: 0.8 }}
+    >
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="flex flex-col items-center"
+      >
+        <ChevronDown className="text-orange-400/70 w-8 h-8" />
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // Reusable Hero Component
 const Hero = ({
   headline,
@@ -352,17 +381,17 @@ const Hero = ({
             </h1>
           </div>
           
-          {/* Subtitle - More interesting styling */}
+          {/* Subtitle - Clean without backdrop, better text shadows for readability */}
           <div className="max-w-3xl mx-auto mt-6 md:mt-8">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-orange-100/90 font-light leading-relaxed px-4 font-inter">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed px-4 font-inter" style={{ textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 4px 40px rgba(0,0,0,0.6)' }}>
               <span className="text-orange-200 font-medium">AI systems</span> that{' '}
-              <span className="text-yellow-300">speak with clarity</span>,{' '}
+              <span className="text-yellow-300 font-medium">speak with clarity</span>,{' '}
               <span className="text-orange-200 font-medium">reason</span> with{' '}
-              <span className="text-yellow-300">precision</span>, and{' '}
+              <span className="text-yellow-300 font-medium">precision</span>, and{' '}
               <span className="text-orange-200 font-medium">evolve</span> with{' '}
-              <span className="text-yellow-300">purpose</span>.
+              <span className="text-yellow-300 font-medium">purpose</span>.
               <br />
-              <span className="text-orange-300/80 text-sm sm:text-base md:text-lg mt-2 inline-block">
+              <span className="text-orange-300/90 text-sm sm:text-base md:text-lg mt-2 inline-block font-normal">
                 Design-driven engineering studio • Lahore → Global
               </span>
             </p>
@@ -403,17 +432,16 @@ const Hero = ({
           )}
         </div>
       </div>
+
+      {/* Simple Scroll Indicator */}
+      <ScrollIndicator />
     </div>
   );
 };
 
 const defaultShaderSource = `#version 300 es
 /*********
-* made by Matthias Hurrle (@atzedent)
-*
-*	To explore strange new worlds, to seek out new life
-*	and new civilizations, to boldly go where no man has
-*	gone before.
+* Modified shader with more spread out flares
 */
 precision highp float;
 out vec4 O;
@@ -423,13 +451,13 @@ uniform float time;
 #define T time
 #define R resolution
 #define MN min(R.x,R.y)
-// Returns a pseudo random number for a given point (white noise)
+
 float rnd(vec2 p) {
   p=fract(p*vec2(12.9898,78.233));
   p+=dot(p,p+34.56);
   return fract(p.x*p.y);
 }
-// Returns a pseudo random number for a given point (value noise)
+
 float noise(in vec2 p) {
   vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
   float
@@ -439,9 +467,10 @@ float noise(in vec2 p) {
   d=rnd(i+1.);
   return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
 }
-// Returns a pseudo random number for a given point (fractal noise)
+
 float fbm(vec2 p) {
-  float t=.0, a=1.; mat2 m=mat2(1.,-.5,.2,1.2);
+  float t=.0, a=1.; 
+  mat2 m=mat2(1.,-.5,.2,1.2);
   for (int i=0; i<5; i++) {
     t+=a*noise(p);
     p*=2.*m;
@@ -449,6 +478,7 @@ float fbm(vec2 p) {
   }
   return t;
 }
+
 float clouds(vec2 p) {
 	float d=1., t=.0;
 	for (float i=.0; i<3.; i++) {
@@ -459,18 +489,26 @@ float clouds(vec2 p) {
 	}
 	return t;
 }
+
 void main(void) {
 	vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
 	vec3 col=vec3(0);
 	float bg=clouds(vec2(st.x+T*.5,-st.y));
-	uv*=1.-.3*(sin(T*.2)*.5+.5);
-	for (float i=1.; i<12.; i++) {
-		uv+=.1*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
+	
+	// Increased spread - changed from 1.-.3 to 1.-.6 for more distribution
+	uv*=1.-.6*(sin(T*.2)*.5+.5);
+	
+	// Reduced iterations from 12 to 8 for less crowded flares
+	for (float i=1.; i<8.; i++) {
+		// Increased spread multiplier from .1 to .25 for wider distribution
+		uv+=.25*cos(i*vec2(.1+.01*i, .8)+i*i+T*.5+.1*uv.x);
 		vec2 p=uv;
 		float d=length(p);
-		col+=.00125/d*(cos(sin(i)*vec3(1,2,3))+1.);
+		
+		// Slightly reduced intensity for softer flares
+		col+=.001/d*(cos(sin(i)*vec3(1,2,3))+1.);
 		float b=noise(i+p+bg*1.731);
-		col+=.002*b/length(max(p,vec2(b*p.x*.02,p.y)));
+		col+=.0015*b/length(max(p,vec2(b*p.x*.02,p.y)));
 		col=mix(col,vec3(bg*.25,bg*.137,bg*.05),d);
 	}
 	O=vec4(col,1);
