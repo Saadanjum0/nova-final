@@ -154,7 +154,7 @@ const Home = () => {
       </section>
 
       {/* Featured Work Section */}
-      <section className="py-32 px-6 md:px-12 lg:px-24 bg-nova-bg-mid">
+      <section className="py-32 px-6 md:px-12 lg:px-24 bg-black">
         <div className="max-w-screen-2xl mx-auto">
           <FadeIn>
             <h2 className="text-4xl md:text-5xl font-space font-normal tracking-tight text-center mb-20">
@@ -166,25 +166,20 @@ const Home = () => {
             {projects.map((project, index) => (
               <FadeIn key={index} delay={index * 0.15}>
                 <motion.div
-                  className={`relative overflow-hidden rounded-none ${
+                  className={`project-card relative overflow-hidden ${
                     project.size === 'large' ? 'md:col-span-2 h-96' : 'h-64'
                   } cursor-pointer group`}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -4 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  {/* Gradient Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-80`}></div>
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300"></div>
-
                   {/* Content */}
                   <div className="relative z-10 h-full p-8 flex flex-col justify-between">
                     <Badge variant="accent">{project.tag}</Badge>
                     <div>
-                      <h3 className="text-3xl font-space font-bold mb-2">{project.name}</h3>
+                      <h3 className="text-3xl font-space font-bold mb-2 text-white">{project.name}</h3>
                       <p className="text-lg text-nova-text-secondary mb-4">{project.description}</p>
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-nova-accent font-medium flex items-center gap-2">
+                        <span className="text-indigo-300 font-medium flex items-center gap-2">
                           View Case Study <ArrowRight size={18} />
                         </span>
                       </div>
