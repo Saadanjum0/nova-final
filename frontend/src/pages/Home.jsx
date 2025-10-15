@@ -221,14 +221,14 @@ const Home = () => {
       </section>
 
       {/* Closing CTA Section */}
-      <section className="py-32 px-6 md:px-12 lg:px-24 bg-nova-bg-mid">
+      <section className="py-32 px-6 md:px-12 lg:px-24 bg-black">
         <FadeIn>
           <div className="text-center space-y-8">
             <h2 className="text-4xl md:text-5xl font-space font-normal tracking-tight">
               Ready to build something exceptional?
             </h2>
             <Link to="/contact">
-              <NovaButton variant="primary" className="text-xl px-12 py-5">
+              <NovaButton variant="premium" className="text-lg px-12 py-5">
                 Let's Talk <ArrowRight size={24} />
               </NovaButton>
             </Link>
