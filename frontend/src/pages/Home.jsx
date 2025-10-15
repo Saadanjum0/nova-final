@@ -195,7 +195,7 @@ const Home = () => {
       {/* Studio Brief Section */}
       <section className="py-32 px-6 md:px-12 lg:px-24 bg-black">
         <div className="max-w-screen-2xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <FadeIn>
               <h2 className="text-4xl md:text-5xl font-space font-light leading-tight text-nova-text-primary">
                 “We don't build AI products.
