@@ -197,7 +197,7 @@ const Home = () => {
         <div className="max-w-screen-2xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <FadeIn>
-              <h2 className="text-4xl md:text-5xl font-space font-light leading-tight text-nova-text-primary">
+              <h2 className="hero-quote text-left">
                 “We don't build AI products.
                 <br />
                 We build products that happen to be intelligent.”
