@@ -120,7 +120,7 @@ const Work = () => {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="bg-nova-bg-raised border border-nova-glass-border rounded-none max-w-4xl w-full p-12 relative"
+              className="bg-[rgba(26,26,28,0.95)] backdrop-blur-2xl border border-white/10 rounded-2xl max-w-4xl w-full p-12 relative"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
