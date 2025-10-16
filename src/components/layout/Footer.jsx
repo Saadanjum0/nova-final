@@ -59,7 +59,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-orange-400/10 pt-8 text-center">
           <p className="text-orange-200/50 text-sm">
-            © 2024 Nova AI. All rights reserved. Building intelligence with purpose.
+            © 2025 Nova AI. All rights reserved. Building intelligence with purpose.
           </p>
         </div>
       </div>

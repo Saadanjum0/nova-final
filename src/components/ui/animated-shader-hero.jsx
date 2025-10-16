@@ -302,22 +302,25 @@ const AnimatedText = () => {
     return () => clearInterval(interval);
   }, [words.length]);
 
+  const isNova = words[index] === 'Nova';
+
   return (
     <div className="relative inline-block w-full text-center">
       <AnimatePresence mode="wait">
-        <motion.div
+        <motion.span
           key={index}
           initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
-          transition={{ 
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1]
-          }}
-          className="bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent"
+          transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+          className={`block text-3xl sm:text-5xl md:text-7xl lg:text-8xl ${
+            isNova
+              ? 'text-white'
+              : 'bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent'
+          }`}
         >
           {words[index]}
-        </motion.div>
+        </motion.span>
       </AnimatePresence>
     </div>
   );
@@ -373,9 +376,9 @@ const Hero = ({
         <div className="text-center space-y-4 md:space-y-6 max-w-5xl mx-auto w-full">
           {/* Main Heading with Animated Text - Centered and Responsive */}
           <div className="space-y-1 md:space-y-2">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+            <h1 className="font-bold leading-tight">
               <AnimatedText />
-              <span className="block mt-2 bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent">
+              <span className="block mt-1 text-5xl sm:text-6xl md:text-8xl lg:text-9xl bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent">
                 Engineered.
               </span>
             </h1>
