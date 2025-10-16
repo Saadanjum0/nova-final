@@ -7,8 +7,8 @@ const About = () => {
     <div className="relative min-h-screen bg-black overflow-hidden">
       {/* Blurred Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-900/20 via-black to-purple-900/20 blur-3xl"></div>
-      
-      {/* Content */}
+
+                  {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 sm:px-6">
         <div className="text-center space-y-6 sm:space-y-8 max-w-2xl">
           {/* Coming Soon Badge */}
