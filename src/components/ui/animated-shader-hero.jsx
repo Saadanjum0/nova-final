@@ -313,10 +313,10 @@ const AnimatedText = () => {
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
           transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
-          className={`block text-3xl sm:text-5xl md:text-7xl lg:text-8xl ${
+          className={`block ${
             isNova
-              ? 'text-white'
-              : 'bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent'
+              ? 'text-white font-extrabold text-6xl sm:text-8xl md:text-9xl lg:text-9xl'
+              : 'font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent'
           }`}
         >
           {words[index]}
@@ -378,7 +378,7 @@ const Hero = ({
           <div className="space-y-1 md:space-y-2">
             <h1 className="font-bold leading-tight">
               <AnimatedText />
-              <span className="block mt-1 text-5xl sm:text-6xl md:text-8xl lg:text-9xl bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent">
+              <span className="block mt-1 text-6xl sm:text-7xl md:text-9xl lg:text-9xl bg-gradient-to-r from-orange-300 via-yellow-400 to-amber-300 bg-clip-text text-transparent">
                 Engineered.
               </span>
             </h1>
