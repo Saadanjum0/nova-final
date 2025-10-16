@@ -334,7 +334,7 @@ const ScrollIndicator = () => {
 
   return (
     <motion.div
-      className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
+      className="sm:hidden absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer z-20"
       onClick={scrollToContent}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -397,16 +397,16 @@ const Hero = ({
             </p>
           </div>
           
-          {/* CTA Buttons with Moving Border */}
+          {/* CTA Buttons with Moving Border (hidden on mobile) */}
           {buttons && (
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8 md:mt-10 px-4">
+            <div className="hidden sm:flex gap-4 justify-center mt-10 px-4">
               {buttons.primary && (
                 <MovingBorderButton
                   as="button"
                   onClick={buttons.primary.onClick}
                   borderRadius="2rem"
                   duration={3000}
-                  containerClassName="w-full sm:w-auto"
+                  containerClassName="w-auto"
                   borderClassName="bg-[radial-gradient(var(--orange-500)_40%,transparent_60%)]"
                   className="bg-black/90 border-orange-400/20 backdrop-blur-xl text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg"
                 >
@@ -421,7 +421,7 @@ const Hero = ({
                   onClick={buttons.secondary.onClick}
                   borderRadius="2rem"
                   duration={3500}
-                  containerClassName="w-full sm:w-auto"
+                  containerClassName="w-auto"
                   borderClassName="bg-[radial-gradient(var(--yellow-500)_40%,transparent_60%)]"
                   className="bg-black/70 border-orange-400/20 backdrop-blur-xl text-orange-100 px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg"
                 >
@@ -433,8 +433,7 @@ const Hero = ({
         </div>
       </div>
 
-      {/* Simple Scroll Indicator */}
-      <ScrollIndicator />
+      {/* Scroll indicator removed as requested */}
     </div>
   );
 };
